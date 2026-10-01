@@ -1,0 +1,105 @@
+{
+  "entities": {
+    "UserAccount": {
+      "title": "Compte Utilisateur & Officier",
+      "description": "Comptes d'instructeurs, surveillants et membres de la direction ayant accès au Bureau Disciplinaire de Konoha.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "ninjaName": { "type": "string" },
+        "password": { "type": "string" },
+        "role": { "type": "string" },
+        "ninjaRank": { "type": "string" },
+        "posts": { "type": "array" },
+        "department": { "type": "string" },
+        "matricule": { "type": "string" },
+        "isPrimaryAdmin": { "type": "boolean" },
+        "status": { "type": "string" },
+        "avatar": { "type": "string" },
+        "joinedDate": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "email", "ninjaName", "password", "role", "ninjaRank", "posts"]
+    },
+    "SanctionReport": {
+      "title": "Rapport & Sanction Disciplinaire",
+      "description": "Procès-verbal officiel consignant une infraction, la gravité, les punitions et l'éventuelle interdiction d'examen.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentName": { "type": "string" },
+        "studentClan": { "type": "string" },
+        "studentClass": { "type": "string" },
+        "studentRegistrationNumber": { "type": "string" },
+        "infractionType": { "type": "string" },
+        "gravity": { "type": "string" },
+        "description": { "type": "string" },
+        "evidence": { "type": "string" },
+        "sanctionApplied": { "type": "string" },
+        "sanctionsList": { "type": "array" },
+        "status": { "type": "string" },
+        "summonsIssued": { "type": "boolean" },
+        "choreHoursTotal": { "type": "number" },
+        "choreHoursRemaining": { "type": "number" },
+        "durationRP": { "type": "string" },
+        "durationIRLDays": { "type": "number" },
+        "startDateIRL": { "type": "string" },
+        "endDateIRL": { "type": "string" },
+        "sanctionPeriodText": { "type": "string" },
+        "examBan": { "type": "object" },
+        "konohaDate": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "studentName", "studentClan", "infractionType", "gravity", "description", "sanctionApplied", "status"]
+    },
+    "StudentRecord": {
+      "title": "Dossier Élève de l'Académie",
+      "description": "Fiche de suivi de l'élève ajoutée ou mise à jour lors d'une sanction, recensant les interdictions d'examen et durées de sanction selon l'échelle RP/IRL.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "clan": { "type": "string" },
+        "class": { "type": "string" },
+        "registrationNumber": { "type": "string" },
+        "avatar": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "age": { "type": "string" },
+        "chakraNature": { "type": "string" },
+        "mentor": { "type": "string" },
+        "guardianName": { "type": "string" },
+        "guardianContact": { "type": "string" },
+        "disciplinaryNotes": { "type": "string" },
+        "totalInfractions": { "type": "number" },
+        "activeSanctions": { "type": "number" },
+        "remainingHours": { "type": "number" },
+        "highestGravity": { "type": "string" },
+        "hasExamBan": { "type": "boolean" },
+        "examBanDuration": { "type": "string" },
+        "examBanReductionTask": { "type": "string" },
+        "examBanEndDateIRL": { "type": "string" },
+        "activeSanctionPeriodText": { "type": "string" },
+        "lastInfractionDate": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "clan", "registrationNumber"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserAccount",
+      "description": "Comptes habilités à accéder et gérer le bureau disciplinaire."
+    },
+    "/sanctions/{sanctionId}": {
+      "schema": "SanctionReport",
+      "description": "Rapports d'infraction et procès-verbaux de sanctions."
+    },
+    "/students/{studentId}": {
+      "schema": "StudentRecord",
+      "description": "Registre des élèves fichés ou sanctionnés à l'Académie de Konoha."
+    }
+  }
+}

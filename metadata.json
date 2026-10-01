@@ -1,0 +1,6 @@
+{
+  "name": "Bureau Disciplinaire - Académie de Konoha | Zenkai RP",
+  "description": "Portail sécurisé du Bureau Disciplinaire de l'Académie de Konoha sur le serveur Naruto RP Zenkai. Registre d'infractions, sanctions d'élèves, gestion du personnel et archives officielles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to validate ID length and charset
+    function isValidId(docId) {
+      return docId is string && docId.size() > 0 && docId.size() <= 128;
+    }
+
+    // Accounts of officers & staff
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update, delete: if isValidId(userId);
+    }
+
+    // Sanctions & Disciplinary Logs
+    match /sanctions/{sanctionId} {
+      allow read: if true;
+      allow create, update, delete: if isValidId(sanctionId);
+    }
+
+    // Students Directory (Added/updated on sanction)
+    match /students/{studentId} {
+      allow read: if true;
+      allow create, update, delete: if isValidId(studentId);
+    }
+
+    // Academy Posts configuration & settings
+    match /academy_config/{docId} {
+      allow read: if true;
+      allow write: if isValidId(docId);
+    }
+
+    // Fallback test connection
+    match /test/{testId} {
+      allow read, write: if true;
+    }
+  }
+}
